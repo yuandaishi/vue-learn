@@ -16,9 +16,17 @@
     <el-button @click.ctrl="ctrlClick($event)" key="c"
       >点击ctrl+click的时候触发</el-button
     >
-    <emit :msg="msg" @changeMsg="changeMsg" v-model="msg"
-      ><div class="box">这是一个例子，好不好再说</div></emit
-    >
+    <emit :msg="msg" @changeMsg="changeMsg" v-model="msg">
+      <!-- 填充在默认的插槽 -->
+      <div class="box">这是一个例子，好不好再说</div>
+      <template v-slot:body><div>这是body插槽</div></template>
+      <template v-slot:foot="user"
+        ><div>
+          这里是foot插槽
+          <p>{{ user.user.firstName }}</p>
+        </div></template
+      >
+    </emit>
   </div>
 </template>
 
@@ -31,6 +39,9 @@ export default {
     return {
       con: true,
       msg: "父组件msg",
+      user: {
+        firstName: "我叫YDSYDS",
+      },
     };
   },
   components: {

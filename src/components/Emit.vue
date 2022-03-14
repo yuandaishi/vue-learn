@@ -15,7 +15,10 @@
       :value="msg"
       @input="$emit('input', $event.target.value)"
     />
+    <slot name="body"></slot>
     <slot></slot>
+    <p>测试插槽位置</p>
+    <slot name="foot" :user="user">{{ user.firstName }}</slot>
   </div>
 </template>
 
@@ -26,6 +29,14 @@ export default {
     msg: {
       type: String,
     },
+  },
+  data: function () {
+    return {
+      user: {
+        firstName: "测试用xxxx",
+        lastName: "测试用lastName",
+      },
+    };
   },
   methods: {
     changeFarAction() {
