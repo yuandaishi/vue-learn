@@ -11,11 +11,14 @@ import App from "./App.vue";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import router from "./router/router";
+import Store from "./store/store"
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 
+
 new Vue({
   router,
+  store: Store, //注入store，之后的vue组件可以通过this.$store获取
   render: (h) => h(App),
 }).$mount("#app");

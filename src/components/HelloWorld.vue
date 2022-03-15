@@ -67,11 +67,17 @@ export default {
           key: "2",
           link: "/KeySame",
         },
-                {
+        {
           name: "Is",
           class: "el-icon-document",
           key: "3",
           link: "/Is",
+        },
+        {
+          name: "KeepAlive",
+          class: "el-icon-document",
+          key: "4",
+          link: "/Keep-alive",
         },
       ],
     };

@@ -11,6 +11,7 @@ import HelloWorld from "./../components/HelloWorld.vue";
 import Computed from "./../components/computed/Computed.vue";
 import KeySame from "./../components/KeySame.vue";
 import Is from "./../components/Is.vue"
+import KeepAlive from "./../components/KeepAlive.vue"
 const preUrl = "";
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
       {
         path: preUrl + "Is",
         component: Is,
+      },
+      {
+        path: preUrl + "Keep-alive",
+        component: KeepAlive,
       },
     ],
   },
