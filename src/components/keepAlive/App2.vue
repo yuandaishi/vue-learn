@@ -21,8 +21,9 @@ export default {
   methods: {
     changeCount() {
       console.log("xxxx");
-      this.$store.commit("increment");
-      this.$store.commit("changeAge");
+      // this.$store.commit("increment");
+      // this.$store.commit("changeAge");
+      this.$store.dispatch("increment");
       console.log(this.$store.state.count); //这个值虽然改变了，如果count直接定义在data中，视图并不会跟着改变
     },
   },

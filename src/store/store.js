@@ -2,6 +2,11 @@ import Vue from "vue";
 import Vuex from "vuex";
 // vuex是用在store这里的
 Vue.use(Vuex);
+
+const FOO = function (foo) {
+    foo();
+}
+
 const Store = new Vuex.Store({
     state: {
         count: 0,
@@ -13,7 +18,17 @@ const Store = new Vuex.Store({
     },
     mutations: {
         increment(state) {
-            state.count++
+            // // 这样并不算异步
+            // setTimeout(() => {
+            //     state.count++
+            // }, 5000);
+
+            //state.count++
+            // 这样也不算异步函数
+            FOO(() => {
+                state.count++;
+                console.log('abcdefg')
+            });
         },
         changeAge(state) {
             state.me.age++;
@@ -22,6 +37,11 @@ const Store = new Vuex.Store({
     getters: {
         self: function (state) {
             return state.me.name + state.me.age + state.me.sex;
+        }
+    },
+    actions: {
+        increment(context) {
+            context.commit('increment')
         }
     }
 })
