@@ -13,6 +13,7 @@
     <el-button @click="changeComponent('1')">点击切换1</el-button>
     <el-button @click="changeComponent('2')">点击切换2</el-button>
     <el-button @click="changeComponent('3')">点击切换3</el-button>
+    <p>name:{{name}}</p>
   </div>
 </template>
 
@@ -23,15 +24,33 @@ import App3 from './is/app3.vue'
 
 export default {
   name: "Is",
+  props:{
+    sex:{
+      type:String,
+      default:"man"
+    }
+  },
   data: function () {
     return {
       currentComponent: "app1",
+      name:''
     };
   },
   components:{
       App1,
       App2,
       App3
+  },
+  watch:{
+    $route:{
+      handler:function(loaction){
+        if(loaction.query.name){
+          this.name=loaction.query.name
+        }
+        console.log(loaction);
+      },
+      immediate:true
+    }
   },
   methods: {
     changeComponent(key) {

@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/components/Is.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1650762129188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1650762143552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n     <component :is=\"currentComponent\"></component>\r\n     <el-button @click=\"changeComponent('1')\">点击切换1</el-button>\r\n     <el-button @click=\"changeComponent('2')\">点击切换2</el-button>\r\n     <el-button @click=\"changeComponent('3')\">点击切换3</el-button>\r\n+    <p>name:{{name}}</p>\r\n   </div>\r\n </template>\r\n \r\n <script>\r\n"
+                },
+                {
+                    "date": 1650762252591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n   </div>\r\n </template>\r\n \r\n <script>\r\n+import func from 'vue-editor-bridge';\r\n import App1 from './is/app1.vue'\r\n import App2 from './is/app2.vue'\r\n import App3 from './is/app3.vue'\r\n \r\n@@ -39,8 +40,16 @@\n       App1,\r\n       App2,\r\n       App3\r\n   },\r\n+  watch:{\r\n+    $route:{\r\n+      handler:function(loaction){\r\n+        console.log(loaction);\r\n+      },\r\n+      immediate:true\r\n+    }\r\n+  },\r\n   methods: {\r\n     changeComponent(key) {\r\n       switch (key) {\r\n         case \"1\":\r\n"
+                },
+                {
+                    "date": 1650762264996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,8 @@\n   </div>\r\n </template>\r\n \r\n <script>\r\n-import func from 'vue-editor-bridge';\r\n import App1 from './is/app1.vue'\r\n import App2 from './is/app2.vue'\r\n import App3 from './is/app3.vue'\r\n \r\n"
+                },
+                {
+                    "date": 1650762367779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,16 +24,17 @@\n \r\n export default {\r\n   name: \"Is\",\r\n   props:{\r\n-    name:{\r\n+    sex:{\r\n       type:String,\r\n-      default:\"\"\r\n+      default:\"man\"\r\n     }\r\n   },\r\n   data: function () {\r\n     return {\r\n       currentComponent: \"app1\",\r\n+      name:''\r\n     };\r\n   },\r\n   components:{\r\n       App1,\r\n@@ -42,8 +43,11 @@\n   },\r\n   watch:{\r\n     $route:{\r\n       handler:function(loaction){\r\n+        if(loaction.query?.name){\r\n+          this.name=loaction.query.name\r\n+        }\r\n         console.log(loaction);\r\n       },\r\n       immediate:true\r\n     }\r\n"
+                },
+                {
+                    "date": 1650762385845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n   },\r\n   watch:{\r\n     $route:{\r\n       handler:function(loaction){\r\n-        if(loaction.query?.name){\r\n+        if(loaction.query.name){\r\n           this.name=loaction.query.name\r\n         }\r\n         console.log(loaction);\r\n       },\r\n"
+                }
+            ],
+            "date": 1650762129188,
+            "name": "Commit-0",
+            "content": "<!--\r\n * @Author: your name\r\n * @Date: 2022-03-08 09:15:29\r\n * @LastEditTime: 2022-03-08 09:28:11\r\n * @LastEditors: Please set LastEditors\r\n * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE\r\n * @FilePath: \\learn\\app\\src\\components\\Is.vue\r\n-->\r\n<template>\r\n  <div>\r\n      <!-- 会渲染相应的组件在这里 -->\r\n    <component :is=\"currentComponent\"></component>\r\n    <el-button @click=\"changeComponent('1')\">点击切换1</el-button>\r\n    <el-button @click=\"changeComponent('2')\">点击切换2</el-button>\r\n    <el-button @click=\"changeComponent('3')\">点击切换3</el-button>\r\n  </div>\r\n</template>\r\n\r\n<script>\r\nimport App1 from './is/app1.vue'\r\nimport App2 from './is/app2.vue'\r\nimport App3 from './is/app3.vue'\r\n\r\nexport default {\r\n  name: \"Is\",\r\n  props:{\r\n    name:{\r\n      type:String,\r\n      default:\"\"\r\n    }\r\n  },\r\n  data: function () {\r\n    return {\r\n      currentComponent: \"app1\",\r\n    };\r\n  },\r\n  components:{\r\n      App1,\r\n      App2,\r\n      App3\r\n  },\r\n  methods: {\r\n    changeComponent(key) {\r\n      switch (key) {\r\n        case \"1\":\r\n          this.currentComponent = \"app1\";\r\n          break;\r\n        case \"2\":\r\n          this.currentComponent = \"app2\";\r\n          break;\r\n        case \"3\":\r\n          this.currentComponent = \"app3\";\r\n          break;\r\n        default:\r\n          break;\r\n      }\r\n    },\r\n  },\r\n};\r\n</script>\r\n\r\n<style></style>\r\n"
+        }
+    ]
+}

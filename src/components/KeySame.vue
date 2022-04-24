@@ -41,10 +41,18 @@ export default {
       }
     };
   },
+  mounted(){
+    this.setMsg();
+  },
   components: {
     Emit,
   },
   methods: {
+    setMsg(){
+      setTimeout(() => {
+        this.msg='夜夜爷爷也饿耶耶耶'
+      }, 2000);
+    },
     changeCon() {
       console.log("xxx");
       return (this.con = !this.con);
