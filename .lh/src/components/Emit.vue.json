@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 19,
+            "activePatchIndex": 27,
             "patches": [
                 {
                     "date": 1650762680357,
@@ -84,6 +84,38 @@
                 {
                     "date": 1650779975688,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n           this.sex = loaction.query.sex;\r\n         }\r\n         console.log(loaction);\r\n       },\r\n-      immediate: true,\r\n+      immediate: false,\r\n     },\r\n     salary: {\r\n       handler: function (val) {\r\n         console.log('salary',val);\r\n"
+                },
+                {
+                    "date": 1650780786146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,11 +37,13 @@\n     }\r\n   },\r\n   beforeCreate() {\r\n     // 在实例初始化之后,进行数据侦听和事件/侦听器的配置之前同步调用。\r\n+    //准备创建实例\r\n     console.log(\"beforeCreate\", this, this.$el);\r\n   },\r\n   created() {\r\n+    //准备执行diff，render\r\n     // 在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件/侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。\r\n     console.log(\"created\", this, this.$el);\r\n   },\r\n   beforeMount() {\r\n"
+                },
+                {
+                    "date": 1650780795084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     //准备创建实例\r\n     console.log(\"beforeCreate\", this, this.$el);\r\n   },\r\n   created() {\r\n-    //准备执行diff，render\r\n+    //准备执行render\r\n     // 在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件/侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。\r\n     console.log(\"created\", this, this.$el);\r\n   },\r\n   beforeMount() {\r\n"
+                },
+                {
+                    "date": 1650781541720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,14 +38,14 @@\n   },\r\n   beforeCreate() {\r\n     // 在实例初始化之后,进行数据侦听和事件/侦听器的配置之前同步调用。\r\n     //准备创建实例\r\n-    console.log(\"beforeCreate\", this, this.$el);\r\n+    console.log(\"beforeCreate\", JSON.parse(JSON.stringify(this)), this.$el);\r\n   },\r\n   created() {\r\n     //准备执行render\r\n     // 在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件/侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。\r\n-    console.log(\"created\", this, this.$el);\r\n+    console.log(\"created\", (JSON.parse(this)), this.$el);\r\n   },\r\n   beforeMount() {\r\n     // 在挂载开始之前被调用：相关的 render 函数首次被调用。\r\n     // 该钩子在服务器端渲染期间不被调用。\r\n"
+                },
+                {
+                    "date": 1650781553739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n   },\r\n   created() {\r\n     //准备执行render\r\n     // 在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件/侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。\r\n-    console.log(\"created\", (JSON.parse(this)), this.$el);\r\n+    console.log(\"created\", JSON.parse(JSON.stringify(this)), this.$el);\r\n   },\r\n   beforeMount() {\r\n     // 在挂载开始之前被调用：相关的 render 函数首次被调用。\r\n     // 该钩子在服务器端渲染期间不被调用。\r\n"
+                },
+                {
+                    "date": 1650781569764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n   },\r\n   beforeCreate() {\r\n     // 在实例初始化之后,进行数据侦听和事件/侦听器的配置之前同步调用。\r\n     //准备创建实例\r\n-    console.log(\"beforeCreate\", JSON.parse(JSON.stringify(this)), this.$el);\r\n+    //console.log(\"beforeCreate\", JSON.parse(JSON.stringify(this)), this.$el);\r\n   },\r\n   created() {\r\n     //准备执行render\r\n     // 在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件/侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。\r\n"
+                },
+                {
+                    "date": 1650781601816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n   },\r\n   created() {\r\n     //准备执行render\r\n     // 在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件/侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。\r\n-    console.log(\"created\", JSON.parse(JSON.stringify(this)), this.$el);\r\n+    //console.log(\"created\", JSON.parse(JSON.stringify(this)), this.$el);\r\n   },\r\n   beforeMount() {\r\n     // 在挂载开始之前被调用：相关的 render 函数首次被调用。\r\n     // 该钩子在服务器端渲染期间不被调用。\r\n"
+                },
+                {
+                    "date": 1650781618204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n   },\r\n   beforeCreate() {\r\n     // 在实例初始化之后,进行数据侦听和事件/侦听器的配置之前同步调用。\r\n     //准备创建实例\r\n-    //console.log(\"beforeCreate\", JSON.parse(JSON.stringify(this)), this.$el);\r\n+    console.log(\"beforeCreate\", JSON.parse(JSON.stringify(this)), this.$el);\r\n   },\r\n   created() {\r\n     //准备执行render\r\n     // 在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件/侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。\r\n"
+                },
+                {
+                    "date": 1650781655049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,15 +37,13 @@\n     }\r\n   },\r\n   beforeCreate() {\r\n     // 在实例初始化之后,进行数据侦听和事件/侦听器的配置之前同步调用。\r\n-    //准备创建实例\r\n-    console.log(\"beforeCreate\", JSON.parse(JSON.stringify(this)), this.$el);\r\n+    console.log(\"beforeCreate\", this, this.$el);\r\n   },\r\n   created() {\r\n-    //准备执行render\r\n     // 在实例创建完成后被立即同步调用。在这一步中，实例已完成对选项的处理，意味着以下内容已被配置完毕：数据侦听、计算属性、方法、事件/侦听器的回调函数。然而，挂载阶段还没开始，且 $el property 目前尚不可用。\r\n-    //console.log(\"created\", JSON.parse(JSON.stringify(this)), this.$el);\r\n+    console.log(\"created\", this, this.$el);\r\n   },\r\n   beforeMount() {\r\n     // 在挂载开始之前被调用：相关的 render 函数首次被调用。\r\n     // 该钩子在服务器端渲染期间不被调用。\r\n"
                 }
             ],
             "date": 1650762680357,
