@@ -1,0 +1,86 @@
+{
+    "sourceFile": "src/main.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 17,
+            "patches": [
+                {
+                    "date": 1650870383800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1650871184672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,14 @@\n Vue.config.productionTip = false;\r\n Vue.use(ElementUI);\r\n Vue.use(VueAxios, axios)\r\n \r\n+// if(process.env.NODE_ENV===''){\r\n+\r\n+// }\r\n+\r\n+console.log(process.env.NODE_ENV)\r\n+\r\n new Vue({\r\n   router,\r\n   render: (h) => h(App),\r\n }).$mount(\"#app\");\r\n"
+                },
+                {
+                    "date": 1650874367823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,24 +7,28 @@\n  * @FilePath: \\learn\\app\\src\\main.js\r\n  */\r\n import Vue from \"vue\";\r\n import App from \"./App.vue\";\r\n-import axios from 'axios'\r\n-import VueAxios from 'vue-axios'\r\n+import axios from \"axios\";\r\n+import VueAxios from \"vue-axios\";\r\n import ElementUI from \"element-ui\";\r\n import \"element-ui/lib/theme-chalk/index.css\";\r\n import router from \"./router/router\";\r\n \r\n Vue.config.productionTip = false;\r\n Vue.use(ElementUI);\r\n-Vue.use(VueAxios, axios)\r\n+Vue.use(VueAxios, axios);\r\n \r\n-// if(process.env.NODE_ENV===''){\r\n-\r\n-// }\r\n-\r\n-console.log(process.env.NODE_ENV)\r\n-\r\n-new Vue({\r\n-  router,\r\n-  render: (h) => h(App),\r\n-}).$mount(\"#app\");\r\n+if (process.env.NODE_ENV === \"development\") {\r\n+  import(\"./mocks/browser\").then(async ({ default: worker }) => {\r\n+    await worker.start();\r\n+    new Vue({\r\n+      router,\r\n+      render: (h) => h(App),\r\n+    }).$mount(\"#app\");\r\n+  });\r\n+} else {\r\n+  new Vue({\r\n+    router,\r\n+    render: (h) => h(App),\r\n+  }).$mount(\"#app\");\r\n+}\r\n"
+                },
+                {
+                    "date": 1650874523322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   import(\"./mocks/browser\").then(async ({ default: worker }) => {\r\n+    console.log('worker',worker)\r\n     await worker.start();\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n"
+                },
+                {
+                    "date": 1650874768038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,15 +18,12 @@\n Vue.use(ElementUI);\r\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n-  import(\"./mocks/browser\").then(async ({ default: worker }) => {\r\n-    console.log('worker',worker)\r\n-    await worker.start();\r\n-    new Vue({\r\n-      router,\r\n-      render: (h) => h(App),\r\n-    }).$mount(\"#app\");\r\n+  const { mocker } = require(\"./mocks/browser\");\r\n+  mocker.start({\r\n+      // 对于没有 mock 的接口直接通过，避免异常\r\n+      onUnhandledRequest: \"bypass\",\r\n   });\r\n } else {\r\n   new Vue({\r\n     router,\r\n"
+                },
+                {
+                    "date": 1650874861005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   const { mocker } = require(\"./mocks/browser\");\r\n+  console.log(mocker)\r\n   mocker.start({\r\n       // 对于没有 mock 的接口直接通过，避免异常\r\n       onUnhandledRequest: \"bypass\",\r\n   });\r\n"
+                },
+                {
+                    "date": 1650874889572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,13 +19,16 @@\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   const { mocker } = require(\"./mocks/browser\");\r\n-  console.log(mocker)\r\n   mocker.start({\r\n       // 对于没有 mock 的接口直接通过，避免异常\r\n       onUnhandledRequest: \"bypass\",\r\n   });\r\n+  new Vue({\r\n+    router,\r\n+    render: (h) => h(App),\r\n+  }).$mount(\"#app\");\r\n } else {\r\n   new Vue({\r\n     router,\r\n     render: (h) => h(App),\r\n"
+                },
+                {
+                    "date": 1650874947302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,12 +18,14 @@\n Vue.use(ElementUI);\r\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n-  const { mocker } = require(\"./mocks/browser\");\r\n-  mocker.start({\r\n-      // 对于没有 mock 的接口直接通过，避免异常\r\n-      onUnhandledRequest: \"bypass\",\r\n+  require('./mocks/browser').then(async ({ default: worker }) => {\r\n+    await worker.start();\r\n+    new Vue({\r\n+      router,\r\n+      render: (h) => h(App),\r\n+    }).$mount(\"#app\");\r\n   });\r\n   new Vue({\r\n     router,\r\n     render: (h) => h(App),\r\n"
+                },
+                {
+                    "date": 1650874963434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n Vue.use(ElementUI);\r\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n-  require('./mocks/browser').then(async ({ default: worker }) => {\r\n+  import('./mocks/browser').then(async ({ default: worker }) => {\r\n     await worker.start();\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n"
+                },
+                {
+                    "date": 1650875175503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,9 @@\n Vue.use(ElementUI);\r\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n+  console.log(import('./mocks/browser'))\r\n   import('./mocks/browser').then(async ({ default: worker }) => {\r\n     await worker.start();\r\n     new Vue({\r\n       router,\r\n"
+                },
+                {
+                    "date": 1650875216107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,9 @@\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   console.log(import('./mocks/browser'))\r\n   import('./mocks/browser').then(async ({ default: worker }) => {\r\n+    console.log(default)\r\n     await worker.start();\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n"
+                },
+                {
+                    "date": 1650875267528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   console.log(import('./mocks/browser'))\r\n-  import('./mocks/browser').then(async ({ default: worker }) => {\r\n-    console.log(default)\r\n+  import('./mocks/browser').then(async (data) => {\r\n+    console.log(data)\r\n     await worker.start();\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n"
+                },
+                {
+                    "date": 1650875298892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   console.log(import('./mocks/browser'))\r\n-  import('./mocks/browser').then(async (data) => {\r\n-    console.log(data)\r\n+  import('./mocks/browser').then(async ({ default: mocker }) => {\r\n+    console.log(mocker)\r\n     await worker.start();\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n"
+                },
+                {
+                    "date": 1650875340059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   console.log(import('./mocks/browser'))\r\n-  import('./mocks/browser').then(async ({ default: mocker }) => {\r\n+  import('./mocks/browser').then(async (data) => {\r\n     console.log(mocker)\r\n     await worker.start();\r\n     new Vue({\r\n       router,\r\n"
+                },
+                {
+                    "date": 1650875350520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   console.log(import('./mocks/browser'))\r\n   import('./mocks/browser').then(async (data) => {\r\n-    console.log(mocker)\r\n+    console.log(data)\r\n     await worker.start();\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n"
+                },
+                {
+                    "date": 1650875385398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   console.log(import('./mocks/browser'))\r\n-  import('./mocks/browser').then(async (data) => {\r\n-    console.log(data)\r\n+  import('./mocks/browser').then(async ({mocker:mocker}) => {\r\n+    console.log(mocker)\r\n     await worker.start();\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n"
+                },
+                {
+                    "date": 1650875393770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,10 +20,10 @@\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n   console.log(import('./mocks/browser'))\r\n   import('./mocks/browser').then(async ({mocker:mocker}) => {\r\n-    console.log(mocker)\r\n-    await worker.start();\r\n+    //console.log(mocker)\r\n+    await mocker.start();\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n     }).$mount(\"#app\");\r\n"
+                },
+                {
+                    "date": 1650875807719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,12 +18,15 @@\n Vue.use(ElementUI);\r\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n-  console.log(import('./mocks/browser'))\r\n-  import('./mocks/browser').then(async ({mocker:mocker}) => {\r\n+  console.log(import(\"./mocks/browser\"));\r\n+  import(\"./mocks/browser\").then(async ({ mocker: mocker }) => {\r\n     //console.log(mocker)\r\n-    await mocker.start();\r\n+    await mocker.start({\r\n+      // 对于没有 mock 的接口直接通过，避免异常\r\n+      onUnhandledRequest: \"bypass\",\r\n+    });\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n     }).$mount(\"#app\");\r\n"
+                }
+            ],
+            "date": 1650870383800,
+            "name": "Commit-0",
+            "content": "/*\r\n * @Author: your name\r\n * @Date: 2022-03-04 08:53:11\r\n * @LastEditTime: 2022-03-04 13:54:18\r\n * @LastEditors: Please set LastEditors\r\n * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE\r\n * @FilePath: \\learn\\app\\src\\main.js\r\n */\r\nimport Vue from \"vue\";\r\nimport App from \"./App.vue\";\r\nimport axios from 'axios'\r\nimport VueAxios from 'vue-axios'\r\nimport ElementUI from \"element-ui\";\r\nimport \"element-ui/lib/theme-chalk/index.css\";\r\nimport router from \"./router/router\";\r\n\r\nVue.config.productionTip = false;\r\nVue.use(ElementUI);\r\nVue.use(VueAxios, axios)\r\n\r\nnew Vue({\r\n  router,\r\n  render: (h) => h(App),\r\n}).$mount(\"#app\");\r\n"
+        }
+    ]
+}

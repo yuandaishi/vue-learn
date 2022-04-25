@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 10,
             "patches": [
                 {
                     "date": 1650762129188,
@@ -28,6 +28,26 @@
                 {
                     "date": 1650762385845,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n   },\r\n   watch:{\r\n     $route:{\r\n       handler:function(loaction){\r\n-        if(loaction.query?.name){\r\n+        if(loaction.query.name){\r\n           this.name=loaction.query.name\r\n         }\r\n         console.log(loaction);\r\n       },\r\n"
+                },
+                {
+                    "date": 1650870437920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,8 +40,11 @@\n       App1,\r\n       App2,\r\n       App3\r\n   },\r\n+  mounted(){\r\n+    this.getInfo();\r\n+  },\r\n   watch:{\r\n     $route:{\r\n       handler:function(loaction){\r\n         if(loaction.query.name){\r\n@@ -52,8 +55,11 @@\n       immediate:true\r\n     }\r\n   },\r\n   methods: {\r\n+    async getInfo(){\r\n+      let res = await this.axios.get('/api/info/124556');\r\n+    },\r\n     changeComponent(key) {\r\n       switch (key) {\r\n         case \"1\":\r\n           this.currentComponent = \"app1\";\r\n"
+                },
+                {
+                    "date": 1650875644542,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n     }\r\n   },\r\n   methods: {\r\n     async getInfo(){\r\n-      let res = await this.axios.get('/api/info/124556');\r\n+      let res = await this.axios.get('/api/info?id=124556');\r\n     },\r\n     changeComponent(key) {\r\n       switch (key) {\r\n         case \"1\":\r\n"
+                },
+                {
+                    "date": 1650875928176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n     }\r\n   },\r\n   methods: {\r\n     async getInfo(){\r\n-      let res = await this.axios.get('/api/info?id=124556');\r\n+      let res = await this.axios.get('/api/info/125468);\r\n     },\r\n     changeComponent(key) {\r\n       switch (key) {\r\n         case \"1\":\r\n"
+                },
+                {
+                    "date": 1650875938897,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n     }\r\n   },\r\n   methods: {\r\n     async getInfo(){\r\n-      let res = await this.axios.get('/api/info/125468);\r\n+      let res = await this.axios.get('/api/info/125468');\r\n     },\r\n     changeComponent(key) {\r\n       switch (key) {\r\n         case \"1\":\r\n"
+                },
+                {
+                    "date": 1650876104340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n     }\r\n   },\r\n   methods: {\r\n     async getInfo(){\r\n-      let res = await this.axios.get('/api/info/125468');\r\n+      let res = await this.axios.get('/api/info/1');\r\n     },\r\n     changeComponent(key) {\r\n       switch (key) {\r\n         case \"1\":\r\n"
                 }
             ],
             "date": 1650762129188,

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/mocks/browser.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1650874349278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1650874349278,
+            "name": "Commit-0",
+            "content": "import { setupWorker } from \"msw\";\r\nimport {isApi} from './is/api';\r\n\r\nexport const mocker = setupWorker(...isApi);"
+        }
+    ]
+}

@@ -8,14 +8,36 @@
  */
 import Vue from "vue";
 import App from "./App.vue";
+import axios from "axios";
+import VueAxios from "vue-axios";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import router from "./router/router";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
+Vue.use(VueAxios, axios);
 
-new Vue({
-  router,
-  render: (h) => h(App),
-}).$mount("#app");
+if (process.env.NODE_ENV === "development") {
+  console.log(import("./mocks/browser"));
+  import("./mocks/browser").then(async ({ mocker: mocker }) => {
+    //console.log(mocker)
+    await mocker.start({
+      // 对于没有 mock 的接口直接通过，避免异常
+      onUnhandledRequest: "bypass",
+    });
+    new Vue({
+      router,
+      render: (h) => h(App),
+    }).$mount("#app");
+  });
+  new Vue({
+    router,
+    render: (h) => h(App),
+  }).$mount("#app");
+} else {
+  new Vue({
+    router,
+    render: (h) => h(App),
+  }).$mount("#app");
+}

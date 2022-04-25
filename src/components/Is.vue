@@ -41,6 +41,9 @@ export default {
       App2,
       App3
   },
+  mounted(){
+    this.getInfo();
+  },
   watch:{
     $route:{
       handler:function(loaction){
@@ -53,6 +56,9 @@ export default {
     }
   },
   methods: {
+    async getInfo(){
+      let res = await this.axios.get('/api/info/1');
+    },
     changeComponent(key) {
       switch (key) {
         case "1":
