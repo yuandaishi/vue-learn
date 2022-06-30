@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 17,
+            "activePatchIndex": 18,
             "patches": [
                 {
                     "date": 1650870383800,
@@ -76,6 +76,10 @@
                 {
                     "date": 1650875807719,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,12 +18,15 @@\n Vue.use(ElementUI);\r\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n-  console.log(import('./mocks/browser'))\r\n-  import('./mocks/browser').then(async ({mocker:mocker}) => {\r\n+  console.log(import(\"./mocks/browser\"));\r\n+  import(\"./mocks/browser\").then(async ({ mocker: mocker }) => {\r\n     //console.log(mocker)\r\n-    await mocker.start();\r\n+    await mocker.start({\r\n+      // 对于没有 mock 的接口直接通过，避免异常\r\n+      onUnhandledRequest: \"bypass\",\r\n+    });\r\n     new Vue({\r\n       router,\r\n       render: (h) => h(App),\r\n     }).$mount(\"#app\");\r\n"
+                },
+                {
+                    "date": 1650877878750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,8 @@\n Vue.use(ElementUI);\r\n Vue.use(VueAxios, axios);\r\n \r\n if (process.env.NODE_ENV === \"development\") {\r\n-  console.log(import(\"./mocks/browser\"));\r\n   import(\"./mocks/browser\").then(async ({ mocker: mocker }) => {\r\n     //console.log(mocker)\r\n     await mocker.start({\r\n       // 对于没有 mock 的接口直接通过，避免异常\r\n"
                 }
             ],
             "date": 1650870383800,

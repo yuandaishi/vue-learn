@@ -19,7 +19,6 @@ Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
 
 if (process.env.NODE_ENV === "development") {
-  console.log(import("./mocks/browser"));
   import("./mocks/browser").then(async ({ mocker: mocker }) => {
     //console.log(mocker)
     await mocker.start({
