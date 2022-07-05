@@ -79,15 +79,21 @@ export default {
           key: "4",
           link: "/Model",
         },
+        {
+          name: "Img",
+          class: "el-icon-document",
+          key: "5",
+          link: "/Img",
+        },
       ],
     };
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
   },
 };

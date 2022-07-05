@@ -37,6 +37,11 @@ if (process.env.NODE_ENV === "development") {
 } else {
   new Vue({
     router,
+    data:function(){
+      return {
+        name:'root'
+      }
+    },
     render: (h) => h(App),
   }).$mount("#app");
 }

@@ -21,6 +21,11 @@ export default {
   // components: {
   //   HelloWorld,
   // },
+  data:function(){
+    return {
+      name:'app'
+    }
+  }
 };
 </script>
 

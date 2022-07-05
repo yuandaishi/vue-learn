@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-checkbox @value='check' @change="(event)=>{$emit('change', event)}">请勾选</el-checkbox>
+    <el-checkbox :value='check' @change="(event)=>{$emit('change', event)}">请勾选</el-checkbox>
     <!-- <input
       type="checkbox"
       v-bind:checked="check"
@@ -13,7 +13,9 @@
 export default {
   name: "model-demo1",
   data: function () {
-    return {};
+    return {
+        name:'xxxxx'
+    };
   },
   model: {
     prop: "check",
@@ -24,6 +26,12 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  mounted(){
+    console.log(this.$root.name)
+  },
+  created(){
+    console.log(this.$root)
   },
   methods: {
     change: function (e) {

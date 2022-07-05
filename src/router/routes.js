@@ -12,6 +12,7 @@ import Computed from "./../components/computed/Computed.vue";
 import KeySame from "./../components/KeySame.vue";
 import Is from "./../components/Is.vue"
 import Model from "./../components/Model.vue"
+import Img from "./../components/Img.vue"
 const preUrl = "";
 const routes = [
   {
@@ -33,6 +34,10 @@ const routes = [
       {
         path: preUrl + "Model",
         component: Model,
+      },
+      {
+        path: preUrl + "Img",
+        component: Img,
       },
     ],
   },
